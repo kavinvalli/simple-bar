@@ -9,7 +9,7 @@ import useWidgetRefresh from '../../hooks/use-widget-refresh'
 const settings = Settings.get()
 const { userWidgetsList } = settings.userWidgets
 
-const UserWidget = ({ widget }) => {
+const UserWidget = ({ index, widget }) => {
   const [state, setState] = Uebersicht.React.useState()
   const [loading, setLoading] = Uebersicht.React.useState(true)
   const {
@@ -76,7 +76,7 @@ const UserWidget = ({ widget }) => {
   }
 
   return (
-    <DataWidget.Widget Icon={Icon} style={style} {...onClickProps}>
+    <DataWidget.Widget classes={`user-widget user-widget--${index}`} Icon={Icon} style={style} {...onClickProps}>
       {state}
     </DataWidget.Widget>
   )
@@ -84,7 +84,7 @@ const UserWidget = ({ widget }) => {
 
 const UserWidgets = () => {
   const keys = Object.keys(userWidgetsList)
-  return keys.map((key) => <UserWidget key={key} widget={userWidgetsList[key]} />)
+  return keys.map((key) => <UserWidget key={key} index={key} widget={userWidgetsList[key]} />)
 }
 
 export default UserWidgets
