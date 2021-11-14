@@ -16,6 +16,7 @@ import * as Mpd from './lib/components/data/mpd.jsx'
 import * as BrowserTrack from './lib/components/data/browser-track.jsx'
 import * as Dnd from './lib/components/data/dnd.jsx'
 import * as Specter from './lib/components/data/specter.jsx'
+import * as Agenda from './lib/components/data/agenda.jsx'
 import * as DataWidgetLoader from './lib/components/data/data-widget-loader.jsx'
 import * as DataWidget from './lib/components/data/data-widget.jsx'
 
@@ -45,7 +46,8 @@ Utils.injectStyles('simple-bar-data-styles', [
   BrowserTrack.styles,
   Dnd.styles,
   Specter.styles,
-  DataWidgetLoader.styles
+  DataWidgetLoader.styles,
+  Agenda.styles
 ])
 
 const render = () => {
@@ -68,6 +70,7 @@ const render = () => {
       <Mpd.Widget />
       <Weather.Widget />
       <Battery.Widget />
+      <Agenda.Widget />
       <Mic.Widget />
       <Sound.Widget />
       <ViscosityVPN.Widget />
