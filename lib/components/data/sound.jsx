@@ -36,11 +36,16 @@ export const Widget = () => {
   const [dragging, setDragging] = Uebersicht.React.useState(false)
 
   const getSound = async () => {
-    const [volume, muted] = await Promise.all([
+    const [volume, muted, device] = await Promise.all([
       Uebersicht.run(`osascript -e 'set ovol to output volume of (get volume settings)'`),
-      Uebersicht.run(`osascript -e 'set ovol to output muted of (get volume settings)'`)
+      Uebersicht.run(`osascript -e 'set ovol to output muted of (get volume settings)'`),
+      Uebersicht.run(`/opt/homebrew/bin/SwitchAudioSource -c`)
     ])
-    setState({ volume: Utils.cleanupOutput(volume), muted: Utils.cleanupOutput(muted) })
+    setState({
+      volume: Utils.cleanupOutput(volume),
+      muted: Utils.cleanupOutput(muted),
+      device: Utils.cleanupOutput(device)
+    })
     setLoading(false)
   }
 
@@ -59,8 +64,8 @@ export const Widget = () => {
   if (loading) return <DataWidgetLoader.Widget className="sound" />
   if (!state || volume === undefined) return null
 
-  const { muted } = state
-  if (_volume === 'missing value' || muted === 'missing value') return null
+  const { muted, device } = state
+  // if (_volume === 'missing value' || muted === 'missing value') return null
 
   const Icon = getIcon(volume, muted)
 
@@ -71,15 +76,26 @@ export const Widget = () => {
   const onMouseDown = () => setDragging(true)
   const onMouseUp = () => setDragging(false)
 
+  const onRightClick = async () => {
+    await Uebersicht.run(`/opt/homebrew/bin/SwitchAudioSource -n`)
+    const device = await Uebersicht.run(`/opt/homebrew/bin/SwitchAudioSource -c`)
+    setState({
+      volume: state.volume,
+      muted: state.muted,
+      device: device
+    })
+  }
+
   const fillerWidth = !volume ? volume : volume / 100 + 0.05
 
   const classes = Utils.classnames('sound', { 'sound--dragging': dragging })
 
   return (
-    <DataWidget.Widget classes={classes} disableSlider>
+    <DataWidget.Widget classes={classes} onRightClick={onRightClick} disableSlider={true}>
       <div className="sound__display">
         <Icon />
-        <span className="sound__value">{volume}%</span>
+        {/* <span className="sound__value">{volume}%</span> */}
+        <span className="sound__value">{device}</span>
       </div>
       <div className="sound__slider-container">
         <input

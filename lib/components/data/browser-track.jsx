@@ -18,6 +18,7 @@ const REFRESH_FREQUENCY = Settings.getRefreshFrequency(refreshFrequency, DEFAULT
 
 const getIcon = (browser) => {
   if (browser === 'chrome') return Icons.GoogleChrome
+  if (browser === 'brave') return Icons.BraveBrowser
   if (browser === 'safari') return Icons.Safari
   if (browser === 'firefox') return Icons.Firefox
   return Icons.Default
@@ -44,7 +45,8 @@ export const Widget = () => {
     const browserTrack = JSON.parse(browserTrackOutput)
     setState({
       ...browserTrack,
-      isSpotifyRunning: Utils.cleanupOutput(spotifyStatus) === 'true'
+      // isSpotifyRunning: Utils.cleanupOutput(spotifyStatus) === 'true'
+      isSpotifyRunning: false
     })
     setLoading(false)
   }
