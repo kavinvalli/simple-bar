@@ -20,7 +20,11 @@ export const Widget = () => {
   const [loading, setLoading] = Uebersicht.React.useState(agendaWidget)
 
   const getEvent = async () => {
-    const [event] = await Promise.all([Uebersicht.run(`/opt/homebrew/bin/i3-agenda`)])
+    const [event] = await Promise.all([
+      Uebersicht.run(
+        `/opt/homebrew/bin/i3-agenda -c $HOME/Code/timetable-gcal/credentials.json -i kavinvalli@gmail.com`
+      )
+    ])
     console.log(event)
     setState({
       event: event
@@ -36,7 +40,7 @@ export const Widget = () => {
   const { event } = state
 
   return (
-    <DataWidget.Widget classes="date-display" style={{ color: 'var(--orange)' }} disableSlider={true}>
+    <DataWidget.Widget classes="date-display" style={{ backgroundColor: "var(--orange)" }} disableSlider={true}>
       {event}
     </DataWidget.Widget>
   )

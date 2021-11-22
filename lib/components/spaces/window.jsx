@@ -29,9 +29,9 @@ const Window = ({ window }) => {
   return (
     <button ref={ref} className={classes} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <Icon className="process__icon" />
-      <span className="process__inner">
+     {/* <span className="process__inner">
         <span className="process__name">{processName}</span>
-      </span>
+      </span> */}
     </button>
   )
 }
