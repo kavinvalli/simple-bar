@@ -46,8 +46,8 @@ Utils.injectStyles('simple-bar-data-styles', [
   BrowserTrack.styles,
   Dnd.styles,
   Specter.styles,
-  DataWidgetLoader.styles
-  // Agenda.styles
+  DataWidgetLoader.styles,
+  Agenda.styles
 ])
 
 const render = () => {
@@ -70,7 +70,7 @@ const render = () => {
       <Mpd.Widget />
       <Weather.Widget />
       <Battery.Widget />
-      {/* <Agenda.Widget /> */}
+      <Agenda.Widget />
       <Mic.Widget />
       <Sound.Widget />
       <ViscosityVPN.Widget />

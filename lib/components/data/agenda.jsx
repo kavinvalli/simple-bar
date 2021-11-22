@@ -21,9 +21,7 @@ export const Widget = () => {
 
   const getEvent = async () => {
     const [event] = await Promise.all([
-      Uebersicht.run(
-        `/opt/homebrew/bin/i3-agenda -c $HOME/Code/timetable-gcal/credentials.json -i kavinvalli@gmail.com`
-      )
+      Uebersicht.run(`/opt/homebrew/bin/i3-agenda -c $HOME/Code/for-i3-agenda.json -i kavinvalli@gmail.com -u`)
     ])
     console.log(event)
     setState({
@@ -40,7 +38,7 @@ export const Widget = () => {
   const { event } = state
 
   return (
-    <DataWidget.Widget classes="date-display" style={{ backgroundColor: "var(--orange)" }} disableSlider={true}>
+    <DataWidget.Widget classes="date-display" style={{ backgroundColor: 'var(--orange)' }} disableSlider={true}>
       {event}
     </DataWidget.Widget>
   )
