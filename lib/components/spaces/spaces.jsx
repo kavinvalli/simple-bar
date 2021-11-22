@@ -16,7 +16,7 @@ export const Component = ({ spaces, windows, SIP, displayIndex }) => {
   const displays = [...new Set(spaces.map((space) => space.display))]
   const SIPDisabled = SIP !== 'System Integrity Protection status: enabled.'
 
-  const { index: currentSpaceIndex } = spaces.find(({ visible, display }) => visible && display === displayIndex)
+  const { index: currentSpaceIndex } = spaces.find((space) => space.display === displayIndex)
 
   return displays.map((display, i) => {
     if (display !== displayIndex) return null
