@@ -8,7 +8,7 @@ import * as Settings from '../../settings'
 
 export { agendaStyles as styles } from '../../styles/components/data/agenda'
 
-const refreshFrequency = 10000
+const refreshFrequency = 60000
 
 const settings = Settings.get()
 
@@ -21,7 +21,7 @@ export const Widget = () => {
 
   const getEvent = async () => {
     const [event] = await Promise.all([
-      Uebersicht.run(`/opt/homebrew/bin/i3-agenda -c $HOME/Code/for-i3-agenda.json -i kavinvalli@gmail.com -u`)
+      Uebersicht.run(`/opt/homebrew/bin/i3-agenda -c $HOME/Code/for-i3-agenda.json -ttl 60 -i kavinvalli@gmail.com`)
     ])
     console.log(event)
     setState({
